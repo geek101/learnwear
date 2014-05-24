@@ -1,6 +1,9 @@
 
 DATA_DIR_PREFIX<-"UCI HAR Dataset"
 
+# Helper function to get data from either
+# test or train directory, returns a data.frame
+# example: get_data("test")
 get_data <- function(dir)
 {
     # first get the set.
@@ -28,6 +31,8 @@ get_data <- function(dir)
     all
 }
 
+# Helper function to get data.frames for both
+# "test" and "train" sets and merge them to a single set.
 merge_test_train <- function()
 {
     d_test <- get_data("test")
@@ -37,6 +42,8 @@ merge_test_train <- function()
     d_all
 }
 
+# Function to extract only the mean and std data for a given
+# Activity Type.
 get_mean_std <- function()
 {
     # Get the merged data
@@ -48,6 +55,9 @@ get_mean_std <- function()
     d_mean_std
 }
 
+# Function to get the merged data and return data.frame
+# with average of all variables for a given Subject,ActivityType
+# pair.
 tidy_data <- function()
 {
     # Get all data
@@ -75,6 +85,7 @@ tidy_data <- function()
     final_d
 }
 
+# Gets the tidy data and writes it to a file.
 write_tidy_data <- function()
 {
     # Get tidy data.
@@ -84,6 +95,7 @@ write_tidy_data <- function()
     write.table(td, file="tidy_data.txt", na="NA", row.names=FALSE)
 }
 
+# Run this to get both files.
 run <- function()
 {
     # get mean std data.
